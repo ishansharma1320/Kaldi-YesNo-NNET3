@@ -1,14 +1,12 @@
-Easy Kaldi
+Training A NNET-3 Model using Kaldi on YesNo Dataset
 ================
 
-The scripts in this repository can be used as a template for training `nnet3` neural networks in Kaldi, with the aim to get you going from your data to a trained model as smoothly as possible.
-
-The code here aims to be easily readable and extensible, and makes few assumptions about the kind of data you have and where it's located on disk.
-
-To get started, `easy-kaldi` should be cloned and moved into the `egs` dir of your local version of the [latest Kaldi branch](https://github.com/kaldi-asr/kaldi).
-
-If you're used to typical Kaldi `egs`, take note that all `easy-kaldi` scripts in `utils` / `local` / `steps` exist in this repo. That is, they do not link back to the `wsj` example. This was done to make custom changes to the scripts, making them more readable.
-
+In Order to set this up, clone this repository in the egs directory of your locally installed kaldi repository
+For successful training of a NNET-3 model, following pre-requisites must be met:
+  
+  1. GMM model with triphone alignments
+  2. A Config file that defines the architecture of Neural Network
+  
 
 
 Creating the `input_task` dir
@@ -22,13 +20,13 @@ Here is an example of the structure of my `input_dir` directory for the corpus c
 
 ```
 input_corpus/
-├── lexicon_nosil.txt -> /data/corpus/lexicon/lexicon_nosil.txt
-├── lexicon.txt -> /data/corpus/lexicon/lexicon.txt
-├── task.arpabo -> /data/corpus/lm/corpus.arpabo
-├── test_audio_path -> /data/corpus/audio/test_audio_path
-├── train_audio_path -> /data/corpus/audio/train_audio_path
-├── transcripts.test -> /data/corpus/audio/transcripts.test
-└── transcripts.train -> /data/corpus/audio/transcripts.train
+├── lexicon_nosil.txt -> /data/corpus/lexicon/lexicon_nosil.txt (present in the input directory for yesno)
+├── lexicon.txt -> /data/corpus/lexicon/lexicon.txt (present in the input directory for yesno)
+├── task.arpabo -> /data/corpus/lm/corpus.arpabo (present in the input directory for yesno)
+├── test_audio_path -> /data/corpus/audio/test_audio_path (this should correspond to the directory which contain the test audio files only)
+├── train_audio_path -> /data/corpus/audio/train_audio_path (this should correspond to the directory which contain the test audio files only)
+├── transcripts.test -> /data/corpus/audio/transcripts.test (present in the data/test_yesno directory, file named as text)
+└── transcripts.train -> /data/corpus/audio/transcripts.train (present in the data/test_yesno directory, file named as train)
 
 0 directories, 7 files
 ```
@@ -72,7 +70,8 @@ The scripts will name files and directories dynamically. You will define the nam
 
 `$ ./run_nnet3.sh "corpus" $hidden-dim $num-epochs`
 
-
+  For yesno, set hidden-dim=39 num-epochs=10 for accurate results
+  
 - first argument is a character string of the corpus name (must correspond to `input_corpus`)
 
 - `hidden-dim` is the number of nodes in your hidden layer
