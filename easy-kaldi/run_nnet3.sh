@@ -71,7 +71,8 @@ if [ 1 ]; then
     egs_dir=$master_egs_dir
     ali_dir=exp_$your_corpus/triphones_aligned
     
-    num_targets=`tree-info $ali_dir/tree 2>/dev/null | grep num-pdfs | awk '{print $2}'` || exit 1;
+    num_targets=1
+    # num_targets=`tree-info $ali_dir/tree 2>/dev/null | grep num-pdfs | awk '{print $2}'` || exit 1;
 	
         echo ""
         echo "###### BEGIN TASK INFO ######"
@@ -137,6 +138,7 @@ if [ "$make_egs" -eq "1" ]; then
 	--cmvn-opts "--norm-means=false --norm-vars=false" \
         --left-context 30 \
         --right-context 31 \
+        --num-utts-subset 5 \
 	$data_dir \
 	$ali_dir \
 	$master_egs_dir \

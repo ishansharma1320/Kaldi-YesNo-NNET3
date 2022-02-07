@@ -88,6 +88,7 @@ if [ -f $data_dir/segments ]; then
     $cmd JOB=1:$nj $log_dir/make_plp_${name}.JOB.log \
          extract-segments scp,p:$scp $log_dir/segments.JOB ark:- \| \
          compute-plp-feats $vtln_opts --verbose=2 --config=$plp_config ark:- ark:- \| \
+         --allow-upsample=true \
          copy-feats --compress=$compress ark:- \
          ark,scp:$plp_dir/raw_plp_$name.JOB.ark,$plp_dir/raw_plp_$name.JOB.scp \
         || exit 1;
@@ -107,6 +108,7 @@ else
          compute-plp-feats \
          $vtln_opts \
          --verbose=2 \
+         --allow-upsample=true \
          --config=$plp_config \
          scp,p:$log_dir/wav_${name}.JOB.scp \
          ark:- \| \

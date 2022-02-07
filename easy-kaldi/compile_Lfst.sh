@@ -37,7 +37,7 @@ cut -d' ' -f2- $input_dir/lexicon.txt | grep -o -E '\w+' | LC_ALL=C sort -u > $i
 local/prepare_dict.sh \
     $data_dir \
     $input_dir \
-    "SIL" \
+    "<SIL>" \
     || printf "\n####\n#### ERROR: prepare_dict.sh\n####\n\n" \
     || exit 1;
 
@@ -47,7 +47,7 @@ local/prepare_lang.sh \
     $data_dir/local/dict \
     $data_dir/local/lang \
     $data_dir/lang \
-    "<unk>" \
+    "<SIL>" \
     || printf "\n####\n#### ERROR: prepare_lang.sh\n####\n\n" \
     || exit 1;
 
